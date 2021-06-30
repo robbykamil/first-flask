@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Get Image - Isyaratku {% endblock %}
+
+
+
+{% block content %} 
+
+<p>{{name}}</p>
+
+<br><br>
+
+<img src="{{url_for('user_get_text', pict=filename)}}" alt="">
+
+<!--{{pict}}-->
+
+{% endblock %}
