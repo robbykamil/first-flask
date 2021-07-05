@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %} Get Image - Isyaratku {% endblock %}
+
+{% block content %} 
+<br>
+<form action="/get-image" method="post">
+    <label for="huruf">Huruf : </label>
+    <input type="text" name="huruf">
+    <br>
+    <input type="submit" value="SUBMIT" class="btn btn-primary">
+</form>
+
+{% endblock %}
