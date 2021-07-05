@@ -1,47 +1,48 @@
-import re
-import io, os
-import cloudstorage
+import os
+import base64
+import io
 
-from flask import Flask, request, render_template, #send_file
-from google.appengine.api import app_identity
+#import image
+from PIL import Image
+from flask import Flask, request, render_template, redirect, url_for
 from google.cloud import storage
 
 
 app = Flask(__name__, template_folder="template")
 
+# Configure this environment variable via app.yaml
+CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
+
+storage_client = storage.Client()
+
 
 @app.route('/')
-def index():
-    return render_template("home.html")
+def home():
+    return render_template("index.html")
 
+@app.route('/translate')
+def translate():
+    return render_template("translate.html")
 
-@app.route('/text', methods=['GET'])
-def text():
-    return render_template("text.html")
+@app.route('/get-image', methods=['GET', 'POST'])
+def get_image():
+    if request.method == 'POST':
+        name = request.form.get("huruf")
+        filepath = name + ".png"
 
+        buc = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
+        blob = buc.blob(filepath)
+        filename = blob.download_to_filename(filepath)
 
-@app.route('/get-text', methods=['POST'])
-def user_get_text():
-  
-  nama = request.form.get("nama")
-  
-  BUCKET_NAME = '/' + os.environ.get('image_language', app_identity.get_default_gcs_bucket_name())
-  ####filename = ""####
-  ####filepath = os.path.join(BUCKET_NAME, filename)####
-  
-  storage_client = storage.Client()
-  blobs = storage_client.list_blobs(image_language, prefix='Colored/', delimiter='/')
-  
-  for blob in blobs:
-    if nama in blob:
-      filepath = os.path.join(BUCKET_NAME, blob)
-      gcs_file = cloudstorage.open(filepath)
-      contents = gcs_file.read()
-      gcs.file.close
-      
-      filename = send_file(io.BytesIO(contents), mimetype='image/png')
-      break
+        im = Image.open(filename)
+        data = io.BytesIO()
+        im.save(data, "PNG")
+        encoded_img_data = base64.b64encode(data.getvalue())
 
-  return render_templat("get-text.html", name=nama, pict=filename)
+        return render_template("get-translate.html", nama=name, pict=encoded_img_data.decode('utf-8'))
+    else:
+        return redirect(url_for(translate))
 
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
 
