@@ -28,5 +28,5 @@ liveness_check:
 
 #[START gae_flex_storage_yaml]
 env_variables:
-  CLOUD_STORAGE_BUCKET: eastern-crawler-311200.appspot.com
+  CLOUD_STORAGE_BUCKET: [PROJECT-ID].appspot.com
 #[END gae_flex_storage_yaml]
