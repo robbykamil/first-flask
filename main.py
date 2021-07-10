@@ -15,13 +15,6 @@ CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
 
 storage_client = storage.Client()
 
-def download_pict():
-    nama = request.form.get("huruf")
-    filepath = "/" + nama + ".png"
-    
-    buc = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
-    blob = buc.get_blob(filepath)
-    url_pict = blob.download_as_bytes()
 
 @app.route('/')
 def home():
@@ -31,10 +24,23 @@ def home():
 def translate():
     return render_template("translate.html")
 
-@app.route('/get-image', methods=['POST'])
+@app.route('/get-image', methods=['GET', 'POST'])
 def get_image():
-    filename = download_pict()
-    return render_template("get-translate.html", pict=filename)
+    if request.method == 'POST':
+        nama = request.form.get("huruf")
+        return redirect(url_for("pict_download", nama=nama))
+    else:
+        return render_template("get-translate.html")
+    
+@app.route('/get-image/<nama>')
+def pict_download(nama):
+    filepath = nama + ".png"
+    
+    buc = storage_client.get_bucket(CLOUD_STORAGE_BUCKET)
+    blob = buc.blob(filepath)
+    pict = blob.download_as_bytes()
+    
+    return pict
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
