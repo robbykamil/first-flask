@@ -5,10 +5,11 @@
 {% block content %} 
 
 <h1>{{ nama }}</h1>
-<br/><br/>
 
 <div id="serve">
-  <img src="{{ url_for('get-image', pict) }}" alt="gmb">
+    <img src="{{ pict }}" alt="gmb" width="300" height="300">
+    <br>
+    <span><a class="button text-translate" href="/translate">Back to Text Translate</a></span>
 </div>
 
 {% endblock %}
