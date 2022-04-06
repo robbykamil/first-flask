@@ -1,14 +1,89 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rk.css') }}">
+</head>
+<body>
+    
+    <header id="header">
+        <div class="brand-name">
+            <h1>Rk.</h1>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li><a href="#main">About</a></li>
+                <li><a href="#body">Experiences</a></li>
+                <li><a href="#footer">Contact</a></li>
+            </ul>
+        </div>
+    </header>
 
-{% block title %} Home Page - Isyaratku {% endblock %}
+    <div id="main">
+        <div class="intro">
+            <h1>Hi, I'm Robby</h1>
+            <br>
+            <h3>Conscientious tester, to fix the programs or new projects in every transaction channel at Bank of Woori Saudara</h3>
+        </div>
+        <div class="my-image">
+            <img src="{{ url_for('static', filename='me-pencil.jpg') }}" alt="profile">
+        </div>
+    </div>
+    <div id="body">
+            <div class="container">
+                <div class="flex-container">
+                    <div class="flex-row">
+                        <div class="box">
+                            <h3><u>Digital Banking & E-Channel Tester</u></h3>
+                            <p>Bank of Woori Saudara</p>
+                            <p>October 2021 - Present</p>
+                        </div>
+                        <div class="box triple">
+                            <p>Helped the digital banking team to testing the new project or fixing the bug at all of transaction channels</p>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="box">
+                            <h3><u>Bankit 2021 Capstone Project</u></h3>
+                            <p>May 2021 - June 2021</p>
+                        </div>
+                        <div class="box triple">
+                            <p>I developed Flask API for received the request from back-end mobile app and deployed to App Engine, also I Created a Cloud Storage for stored the data such as animation and Machine Learning
+                                model</p>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="box">
+                            <h3><u>Web Development Internship</u></h3>
+                            <p>Motion Brand Activator</p>
+                            <p>September 2020 - November 2020</p>
+                        </div>
+                        <div class="box triple">
+                            <p>As a new company, I created a company website profile and maintaining documentation web hosting registers</p>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <div class="box">
+                            <h3><u>IT Support</u></h3>
+                            <p>biMBA - AIUEO</p>
+                            <p>June 2018 – July 2020</p>
+                        </div>
+                        <div class="box triple">
+                            <p>Assisted IT Manager to organize, configure, and maintain the computer systems and networks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
 
-{% block content %} 
-<main>
-    <h1>Welcome to Isyaratku Web Application</h1>
-    <br><br>
-    <p>Choose the button for action that you want to take it</p>
-    <a href="/translate" target="_blank" rel="noopener noreferrer">Translate Sign Languages</a>
-    <br>
-    <a href="/video" target="_blank" rel="noopener noreferrer">Image Detection</a>
-</main>
-{% endblock %}
+    <div id="footer">
+        <div class="footer-follow">
+            <p>We can get in touch on <a href="https://instagram.com/robbykamilll">Instagram</a>, <a href="https://twitter.com/robbykamilll">Twitter</a>, <a href="https://www.linkedin.com/in/robbykamil">Linkedin</a>, and also <a href="mailto:robbykamil99@gmail.com">Email</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
